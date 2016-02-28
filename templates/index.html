@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link href="{% static 'styles/main.css' %}" type='text/css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+    <div class='container'>
+        <div class='megaboard'>
+            {% for i in '123' %}
+            <div class='board-row' num='{{i}}'>
+                {% for j in '123' %}
+                <div class='board' num='{{j}}'>
+                    {% for x in '123' %}
+                    <div class='space-row' num='{{x}}'>
+                        {% for y in '123' %}
+                        <div class='space empty' num='{{y}}'>
+                            <div class='space-content'>
+                                {# <i class="material-icons">&#xE5CD;</i>#}
+                                {# <i class="material-icons">&#xE836;</i>#}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{% static 'scripts/vendor-scripts.js' %}"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
+</body>
+</html>

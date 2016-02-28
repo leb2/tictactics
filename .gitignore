@@ -1,0 +1,9 @@
+bower_components
+node_modules
+*.pyc
+*.swp
+.sass-cache
+.DS_Store
+migrations
+db.sqlite*
+settings_dev.py
