@@ -7,3 +7,4 @@ node_modules
 migrations
 db.sqlite*
 settings_dev.py
+staticcollected
