@@ -14,7 +14,7 @@ def home(request):
     game.save()
     request.session['game_id'] = 'X';
 
-    return render(request, 'index.html', {'game_id': game_id, 'player_turn': request.session.get('turn'), 'show_menu': True})
+    return render(request, 'index.html', {'game_id': game_id, 'player_turn': request.session.get(game_id), 'show_menu': True})
 
 def move(request, game_id):
     location = json.loads(request.GET.get('location'))
@@ -41,7 +41,7 @@ def game(request, game_id):
         'state': state,
         'last_move': last_move,
         'current_turn': current_turn,
-        'player_turn':  request.session.get('turn'),
+        'player_turn':  request.session.get(game_id),
     })
 
 def game_info(request, game_id):
