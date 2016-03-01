@@ -12,7 +12,7 @@ def home(request):
 
     game = Game(game_id=game_id.lower())
     game.save()
-    request.session['game_id'] = 'X';
+    request.session[game_id] = 'X';
 
     return render(request, 'index.html', {'game_id': game_id, 'player_turn': request.session.get(game_id), 'show_menu': True})
 
@@ -29,7 +29,7 @@ def game(request, game_id):
 
     # Make sure the user isn't X and just refreshed the page
     if not 'turn' in request.session:
-        request.session['game_id'] = 'O'
+        request.session[game_id] = 'O'
 
     game = Game.objects.get(game_id=game_id.lower())
     state = game.state
