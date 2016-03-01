@@ -291,9 +291,13 @@
     function pollMoves() {
         $.get('/game_info/' + $('.game-id').text(), {}, function(data) {
             var state = data.state;
-            var lastMove = lastMoveFromStr(data.last_move);
+            var lastMove;
+            if (state.indexOf('X') !== -1 && state.indexOf('O') !== -1) {
+                lastMove = lastMoveFromStr(data.last_move);
+            }
             var turn = data.current_turn;
             updateBoard(state, turn, lastMove, false); // Should this be true?
+            console.log("lastmove: ", game.lastMove);
             $('.turn-indicator').removeClass('X').removeClass('O');
             $('.turn-indicator').addClass(game.turn);
             checkWins();
