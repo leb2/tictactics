@@ -8,20 +8,46 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
-<body>
+<body class='X'>
+    <div class='data'>
+        <div class='state'>{{ state }}</div>
+        <div class='game-id'>{{ game_id }}</div>
+        <div class='last-move'>{{ last_move }}</div>
+        <div class='current-turn'>{{ current_turn }}</div>
+        <div class='player-turn'>{{ player_turn }}</div>
+    </div>
+
+    {% if show_menu %}
+    <div class='menu'>
+        <div class='buttons'>
+            <div class='button first-button share-url'>Share URL</div>
+            <div class='button start-game'>Start</div>
+            <div class='url-info'>
+                <div class='url'>http://t.faugo.com/{{ game_id | upper }}</div>
+            </div>
+            <div class='button first-button pass-play'>Pass &amp; Play</div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class='game-over'>
+        <div class='message'>ERROR</div>
+        <div class='button play-again'><a href='/'>Play Again</a></div>
+    </div>
+
+    <div class='turn-indicator X'></div>
+
     <div class='container'>
         <div class='megaboard'>
-            {% for i in '123' %}
+            {% for i in '012' %}
             <div class='board-row' num='{{i}}'>
-                {% for j in '123' %}
-                <div class='board' num='{{j}}'>
-                    {% for x in '123' %}
+                {% for j in '012' %}
+                <div class='board movable' num='{{j}}'>
+                    {% for x in '012' %}
                     <div class='space-row' num='{{x}}'>
-                        {% for y in '123' %}
+                        {% for y in '012' %}
                         <div class='space empty' num='{{y}}'>
                             <div class='space-content'>
-                                {# <i class="material-icons">&#xE5CD;</i>#}
-                                {# <i class="material-icons">&#xE836;</i>#}
                             </div>
                         </div>
                         {% endfor %}

@@ -1,3 +1,144 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+body {
+  position: relative; }
+
+.button {
+  width: 400px;
+  max-width: 70%;
+  padding: 24px;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
+  background: rgba(0, 0, 0, 0.2);
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  margin: 12px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #444;
+  position: relative; }
+  .button a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .button:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid transparent;
+    color: white;
+    cursor: pointer; }
+  .button:active {
+    background: rgba(0, 0, 0, 0.6); }
+
+.menu, .game-over {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.95);
+  z-index: 20;
+  font-family: "Open Sans", helvetica, arial, sans-serif;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .menu .url-info, .game-over .url-info {
+    background: #DDD;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+    display: none;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    height: 22px;
+    padding: 28px;
+    padding-top: 22px;
+    display: none; }
+  .menu .start-game, .game-over .start-game {
+    max-width: 100%;
+    display: none; }
+  .menu .buttons, .game-over .buttons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+
+.game-over {
+  display: none;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s; }
+  .game-over .message {
+    font-family: "Open Sans", helvetica, arial, sans-serif;
+    font-size: 50px;
+    font-weight: 300;
+    text-transform: uppercase; }
+  .game-over.visible {
+    opacity: 0.9;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+  .game-over .button.play-again {
+    height: 30px;
+    width: 300px; }
+
 /*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
 .ink {
   display: block;
@@ -6,6 +147,10 @@
   border-radius: 100%;
   -webkit-transform: scale(0);
           transform: scale(0); }
+  .ink.X {
+    background: #bf9797; }
+  .ink.O {
+    background: #97aebf; }
 
 @-webkit-keyframes ripple {
   100% {
@@ -26,7 +171,26 @@
 html, body {
   height: 100%;
   margin: 0px;
-  background: #f7f7f7; }
+  background: #dfdfdf;
+  background: url("../images/bg.png");
+  position: relative; }
+
+.turn-indicator {
+  position: absolute;
+  top: 25%;
+  left: 0px;
+  right: 0px;
+  height: 150px;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
+  opacity: 0.7; }
+  .turn-indicator.X {
+    background: #bf9797; }
+  .turn-indicator.O {
+    background: #97aebf; }
+
+.data {
+  display: none; }
 
 .container {
   display: -webkit-box;
@@ -41,11 +205,12 @@ html, body {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 100%; }
+  height: 100%;
+  position: relative; }
   .container .megaboard {
     width: 98%;
     max-width: 600px;
-    background: #DDD;
+    background: #eee;
     padding: 24px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23); }
     .container .megaboard .board-row {
@@ -72,6 +237,15 @@ html, body {
             -ms-flex-pack: distribute;
                 justify-content: space-around;
         margin: 3px; }
+        .container .megaboard .board-row .board.solved.X .space {
+          background: #bf9797 !important; }
+        .container .megaboard .board-row .board.solved.O .space {
+          background: #97aebf !important; }
+        .container .megaboard .board-row .board.movable .space.empty {
+          background: #777 !important; }
+          .container .megaboard .board-row .board.movable .space.empty:hover {
+            background: #5e5e5e !important;
+            cursor: pointer; }
         .container .megaboard .board-row .board .space-row {
           width: 100%;
           display: -webkit-box;
@@ -106,14 +280,21 @@ html, body {
             position: relative;
             margin-bottom: 1px;
             margin-right: 1px;
-            background: #777;
-            overflow: hidden; }
+            background: #b4b4b4;
+            overflow: hidden;
+            -webkit-transition: background 0.15s;
+            transition: background 0.15s; }
+            .container .megaboard .board-row .board .space-row .space.X {
+              background: #bf9797; }
+            .container .megaboard .board-row .board .space-row .space.O {
+              background: #97aebf; }
             .container .megaboard .board-row .board .space-row .space:hover {
               cursor: default; }
-            .container .megaboard .board-row .board .space-row .space.empty:hover {
-              background: #919191;
-              cursor: pointer; }
             .container .megaboard .board-row .board .space-row .space .space-content {
+              -webkit-user-select: none;
+              -moz-user-select: none;
+               -ms-user-select: none;
+                   user-select: none;
               display: -webkit-box;
               display: -webkit-flex;
               display: -ms-flexbox;
@@ -132,7 +313,7 @@ html, body {
               bottom: 0;
               left: 0;
               right: 0; }
-              .container .megaboard .board-row .board .space-row .space .space-content i.x {
-                font-size: 34px; }
-              .container .megaboard .board-row .board .space-row .space .space-content i.o {
-                font-size: 28px; }
+              .container .megaboard .board-row .board .space-row .space .space-content i.X {
+                font-size: 30px; }
+              .container .megaboard .board-row .board .space-row .space .space-content i.O {
+                font-size: 25px; }

@@ -1,0 +1,142 @@
+
+/*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
+.ink {
+    display: block; position: absolute;
+    background: hsl(206, 6%, 73%);
+    border-radius: 100%;
+    transform: scale(0);
+
+    &.X {
+        background: $red-color;
+    }
+    &.O {
+        background: $blue-color;
+    }
+}
+
+@keyframes ripple {
+    100% {opacity: 1; transform: scale(2.5);}
+}
+.ink.animate {animation: ripple 0.30s linear;}
+
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    background: $page-bg;
+    background: url('../images/bg.png');
+    position: relative;
+}
+.turn-indicator {
+    position: absolute;
+    top: 25%;
+    left: 0px;
+    right: 0px;
+    height: 150px;
+    transition: background 0.3s;
+    opacity: 0.7;
+
+    &.X {
+        background: desaturate($red-color, 0%);
+    }
+    &.O {
+        background: desaturate($blue-color, 0%);
+    }
+}
+
+.data {
+    display: none;
+}
+
+.container {
+    @include flex-center;
+    height: 100%;
+    position: relative;
+
+    .megaboard {
+        width: 98%;
+        max-width: 600px;
+        background: $board-bg;
+        padding: 24px;
+        @include shadow(3);
+
+        .board-row {
+            display: flex;
+            width: 100%;
+
+            .board {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                margin: 3px;
+
+                &.solved {
+                    &.X .space {
+                        background: lighten(desaturate($red-color, 0%), 0%) !important;
+                    }
+                    &.O .space {
+                        background: lighten(desaturate($blue-color, 0%), 0%) !important;
+                    }
+                }
+
+                &.movable .space.empty {
+                    background: $space-bg !important;
+
+                    &:hover {
+                        background: darken($space-bg, 10%) !important;
+                        cursor: pointer;
+                    }
+                }
+
+                .space-row {
+                    width: 100%;
+                    display: flex;
+                    flex-grow: 1;
+                    align-items: stretch;
+
+                    .space {
+                        @include flex-center;
+                        flex-grow: 1;
+                        position: relative;
+                        margin-bottom: 1px;
+                        margin-right: 1px;
+                        background: $default-space-bg; //lighten($space-bg, 12%);
+                        overflow: hidden;
+                        transition: background 0.15s;
+
+                        &.X {
+                            background: $red-color;
+                        }
+                        &.O {
+                            background: $blue-color;
+                        }
+
+                        &:hover {
+                            cursor: default;
+                        }
+
+
+                        .space-content {
+                            -webkit-user-select: none;
+                            user-select: none;
+                            @include flex-center;
+                            color: $piece-color;
+                            position: absolute;
+                            top: 0; bottom: 0; left: 0; right: 0;
+
+                            i {
+                                &.X {
+                                    font-size: 30px;
+                                }
+                                &.O {
+                                    font-size: 25px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

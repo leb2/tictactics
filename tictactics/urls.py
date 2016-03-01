@@ -18,6 +18,9 @@ from django.contrib import admin
 from tictactics import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='home')
+    url(r'^admin', admin.site.urls),
+    url(r'^$', views.home, name='home'),
+    url(r'^move/(?P<game_id>.+)', views.move, name='move'),
+    url(r'^game_info/(?P<game_id>.+)', views.game_info, name='info'),
+    url(r'^(?P<game_id>.+)', views.game, name='game'),
 ]

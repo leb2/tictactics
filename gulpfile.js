@@ -13,8 +13,7 @@ var wiredep = require('wiredep').stream;
 var concat = require('gulp-concat');
 var bowerMin = require('bower-min');
 var bowerMinJavaScriptFiles = bowerMin('js','min.js');
-j
-var sassDir = './static/sass/**/*.scss';
+var sassDir = './static/sass/*.scss';
 var templatesDir = './templates/';
 
 gulp.task('scripts', function() {
