@@ -158,7 +158,7 @@
             // If not first move
             var location = [this.lastMove.rowSpace, this.lastMove.colSpace];
             var directedBoard = this.getBoard(location[0], location[1]);
-            if (!directedBoard.isFull()) {
+            if (!directedBoard.solvedBy) {
                 return [directedBoard]
             } else {
                 return this.allBoards()
